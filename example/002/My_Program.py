@@ -4,7 +4,7 @@ from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QMainWindow
 import sys
 
-from GUI import Ui_MainWindow
+from ui.GUI import Ui_MainWindow
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -17,8 +17,8 @@ class MainWindow(QMainWindow):
         # 화면 출력
         self.show()
 
-        image1 = QPixmap("C:/Users/wlxo0/Desktop/다운로드.jpeg")
-        image2 = QPixmap("C:/Users/wlxo0/Desktop/다운로드_SR.jpeg")
+        image1 = QPixmap("./image/mclaren.png")
+        image2 = QPixmap("./image/mclaren_SR.png")
         self.ui.label.setPixmap(image1.scaled(self.ui.label.width(), self.ui.label.height(), aspectRatioMode=Qt.KeepAspectRatio))
         self.ui.label_2.setPixmap(image2.scaled(self.ui.label.width(), self.ui.label.height(), aspectRatioMode=Qt.KeepAspectRatio))
 
