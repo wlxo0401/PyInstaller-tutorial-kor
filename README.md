@@ -17,7 +17,7 @@ PyInstaller는 파이썬 응용 프로그램과 모든 종속성을 단일 패�
 
 # 설치
 
-![pyinstaller 설치]()
+![pyinstaller 설치](https://github.com/wlxo0401/PyInstaller/blob/main/image/1.gif)
 ```python
 pip install pyinstaller
 ```
