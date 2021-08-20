@@ -29,6 +29,9 @@ Python 배포파일을 생성하기 위한 방법은 아래 두가지 방법이�
 
 쉽게 생각해서 프로젝트 작업을 하면서 사용하는 ui, 이미지, 아이콘 등 다같이 배포하기 쉽게 묶어준다.
 
+Windows와 Linux 호환은 안되며, 32bit와 64bit 환경에서 각각 배포파일을 생성해야한다.
+
+
 [도큐멘트](https://pyinstaller.readthedocs.io/en/stable/)
 [라이센스](https://pyinstaller.readthedocs.io/en/stable/license.html)
 
@@ -39,9 +42,9 @@ Python 배포파일을 생성하기 위한 방법은 아래 두가지 방법이�
 pip install pyinstaller
 ```
 
-설치는 파이썬을 사용한 사람들은 누구나 쉽게 가능하다.
+파이썬을 사용한 사람들은 누구나 쉽게 설치 가능하다.
 
-# 사용할 파이썬 코드
+# 사용할 파이썬 예제 코드
 
 ## [예제 코드 보러가기](https://github.com/wlxo0401/PyInstaller)
 
@@ -59,8 +62,8 @@ pip install pyinstaller
 
 # 사용방법
 
-1. **명령어**만 입력해서 콘솔창에서 실행하는 방법 [바로보기](#명령어_방식)
-2. **옵션파일**을 만들어서 <U>명령어로 그 **옵션**을 실행하는 방법</U>이 있다. [바로보기](#spec(옵션파일)_방식)
+1. **명령어**만 입력해서 콘솔창에서 실행하는 방법 [바로보기](#명령어-방식)
+2. **옵션파일**을 만들어서 <U>명령어로 그 **옵션**을 실행하는 방법</U>이 있다. [바로보기](#spec(옵션파일)-방식)
 
 간단한 프로그램은 명령어 방법으로도 충분한데 **옵션파일**을 다루면 <U>옵션을 저장하고 편하게 사용</U> 가능하다.
 
@@ -109,17 +112,18 @@ pyinstaller -F basic_test.py
 pyinstaller --noconsole basic_test.py
 pyinstaller -w basic_test.py
 ```
-이 옵션은 배포 상태로 만들 때 콘솔창을 표시하냐 아니냐를 따지는 부분이다.    
-> 설정하지 않으면 콘솔창 표시되는게 기본 값이다.
+> 표준 i/o에 대 한 콘솔 창을 제공 하지 않습니다. 설정하지 않으면 콘솔창 표시되는게 기본 값이다.
 
-GUI가 없이 만들어진 프로그램이라면 콘솔창으로 입력과 출력을 같이하기 때문에 적용하면 안된다.
+GUI가 없는 프로그램이라면 콘솔창으로 입/출력하기 때문에 적용하면 안된다. (완료해도 실행하면 에러 발생)   
+※ 나만 나는 것인지 아닌지 지금은 모르겠다. 콘솔 창을 제공 하지 않아 cmd로 실행 시켜도 에러가 발생한다.
 
-하지만 GUI가 있는 프로그램은 입력과 출력을 대신하는 UI가 있기 때문에 최종 배포에서는 꼭 적용해야하는 옵션이다. 옵션을 적용하지 않으면 프로그램과 콘솔창이 동시에 켜지고 프로그램 속 출력문들도 모두 보인다.
+반대로 GUI가 있는 프로그램은 입/출력을 대신하는 화면이 있기 때문에 콘솔 창이 필요 없다면 꼭 설정하기! 
 
-테스트 환경에서는 옵션을 적용하지 않고 콘솔창을 같이 띄어서 에러와 출력문을 확인하면서 테스트가 가능하기 때문에 마지막에만 적용하는게 좋다.
+> - 옵션을 적용하지 말아야 할 떄   
+콘솔 창이 출력되면 에러와 print가 모두 출력되니 최종 배포하기 전 까지는 콘솔창을 출력하는게 좋다.
 
 ![콘솔 옵션을 끈 CUI프로그램](https://github.com/wlxo0401/PyInstaller/blob/main/image/6.gif)
-> 옵션을 적용한 콘솔 프로그램
+> 옵션을 적용한 콘솔 창 프로그램 (에러는 모두가 나는지 모름)
 
 ![콘솔이 표시된 GUI프로그램](https://github.com/wlxo0401/PyInstaller/blob/main/image/5.gif)
 > 옵션을 적용하지 않은 GUI 프로그램
@@ -136,16 +140,22 @@ pyinstaller --onefile basic_test.py
 > - GUI가 없는 콘솔 프로그램인데 폴더가 아닌 하나의 파일로 배포 or 테스트하고 싶은 경우   
 > - GUI가 있는데 하나의 파일로 만들어서 콘솔로 만들어서 테스트하고 싶은 경우  
 
+<br>
+
 ```
 pyinstaller --onedir basic_test.py
 ```
 > - GUI가 없이 콘솔 프로그램인데 폴더로 생성해서 배포하고 싶은 경우
 > - GUI가 있는데 폴더로 만들어서 테스트하고 싶은 경우
 
+<br>
+
 ```
 pyinstaller -w --onefile basic_test.py
 ```
 > - GUI가 있으면서 하나의 파일로 배포하고 싶은 경우
+
+<br>
 
 ```
 pyinstaller -w --onedir basic_test.py
@@ -157,7 +167,7 @@ pyinstaller -w --onedir basic_test.py
 **5. 명령어 방법 주의**
 
 > 1. 프로그램 코드에 상대주소를 사용한다면 최종 배포물 폴더 안에 파일들을 이동해야한다.
-> 2. 처음 배포물 생성한다면 콘솔창을 꼭 확인하면서 에러를 잡아가는게 좋다.
+> 2. 처음 배포파일 만들 때 콘솔창 끄는 옵션은 주지 말고 콘솔 창을 확인하면서 에러를 잡아가는게 좋다.
 > 3. 가끔 뭔가 안되는 것 같다.
 
 <hr>
@@ -229,6 +239,8 @@ added_files = [ ("./test.ico", '.'),
 
 아이콘은 상위폴더에, 이미지 폴더 속 사진들은 배포 폴더 속에서도 그대로 위치해주기 위해서 저렇게 설정합니다.
 
+<br>
+
 - **Analysis**   
 ![Analysis](https://github.com/wlxo0401/PyInstaller/blob/main/image/3.PNG) 
 > 실행 코드 파일입니다. 프로그램 실행할 때 제일 먼저 실행하는 파일을 적어주세요.
@@ -236,12 +248,16 @@ added_files = [ ("./test.ico", '.'),
 ['My_Program.py']
 ```
 
+<br>
+
 - **Analysis -> "pathex"**   
 ![pathex](https://github.com/wlxo0401/PyInstaller/blob/main/image/4.PNG) 
 > 실행 파일이 있는 경로입니다.
 ```
 pathex=['C:\\Users\\wlxo0\\Documents\\Python\\PyInstaller\\example\\002']
 ```
+
+<br>
 
 - **Analysis -> "hiddenimports"**   
 [설명](https://stackoverflow.com/questions/27947639/how-to-properly-create-a-pyinstaller-hook-or-maybe-hidden-import)
@@ -251,12 +267,16 @@ pathex=['C:\\Users\\wlxo0\\Documents\\Python\\PyInstaller\\example\\002']
 hiddenimports=["PyQt5.QtMultimediaWidgets"]
 ```
 
+<br>
+
 - **Analysis -> "datas"**    
 ![datas](https://github.com/wlxo0401/PyInstaller/blob/main/image/5.PNG) 
 > 위에 ```added_files```을 작성한 여부로 설정되도록 미리 작성해둔 겁니다.
 ```
 datas=added_files
 ```
+
+<br>
 
 - **EXE -> "name"**    
 ![name](https://github.com/wlxo0401/PyInstaller/blob/main/image/6.PNG) 
@@ -265,12 +285,16 @@ datas=added_files
 name='My_Test_Program'
 ```
 
+<br>
+
 - **EXE -> "debug"**   
 ![debug](https://github.com/wlxo0401/PyInstaller/blob/main/image/7.PNG) 
 > 콘솔창을 활성화해서 배포한다면 프로그램 실행하기 전 모습이 출력됨
 ```
 debug=False
 ```
+
+<br>
 
 - **EXE -> "console"**   
 ![console](https://github.com/wlxo0401/PyInstaller/blob/main/image/8.PNG)
@@ -279,11 +303,15 @@ debug=False
 console=True
 ```
 
+<br>
+
 - **EXE -> "uac_admin"**
 > 프로그램으로 파일을 읽고 쓴다면 관리자 권한 부여를 키고 배포해야한다. 그냥 설정하는게 좋다고 생각됨
 ```
 uac_admin=True
 ```
+
+<br>
 
 - **EXE -> "icon"**   
 ![name](https://github.com/wlxo0401/PyInstaller/blob/main/image/6.PNG) 
@@ -292,6 +320,8 @@ uac_admin=True
 icon='./test.ico'
 ```
 
+<br>
+
 - **COLLECT -> "name"은 생성되는 폴더 이름**   
 ![name](https://github.com/wlxo0401/PyInstaller/blob/main/image/9.PNG) 
 > dist 폴더 속에 생성된 배포용 폴더 이름
@@ -299,6 +329,8 @@ icon='./test.ico'
 name='Public_Program'
 ```
 
+<br>
+<br>
 
 **3. 최종 결과**
 ```
