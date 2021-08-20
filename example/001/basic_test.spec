@@ -33,7 +33,7 @@ exe = EXE(pyz,
           disable_windowed_traceback=False,
           target_arch=None,
           codesign_identity=None,
-          entitlements_file=None )
+          entitlements_file=None , icon='C:\\Users\\wlxo0\\Documents\\Python\\PyInstaller\\example\\002\\icon\\NicePng_register-now-png_2189018.ico')
 coll = COLLECT(exe,
                a.binaries,
                a.zipfiles,
